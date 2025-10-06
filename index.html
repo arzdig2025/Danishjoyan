@@ -1,0 +1,1091 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات کمپیوتری دانشجویان</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Security Styles */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+        
+        /* Custom Colors */
+        .primary-bg { background-color: #003366; }
+        .primary-text { color: #003366; }
+        .secondary-bg { background-color: #f8fafc; }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #003366 0%, #004080 50%, #0066cc 100%);
+        }
+        
+        /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            border-color: #003366;
+            background: #e2e8f0;
+        }
+        
+        /* Page Sections */
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        /* Navigation Active State */
+        .nav-link.active {
+            background-color: #003366;
+            color: white;
+        }
+        
+        /* Form Styles */
+        .form-input {
+            border: 2px solid #e2e8f0;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #003366;
+            outline: none;
+        }
+        
+        /* Disable text selection and context menu */
+        ::selection {
+            background: transparent;
+        }
+        
+        ::-moz-selection {
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="primary-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-xl font-bold">💻 خدمات کمپیوتری دانشجویان</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-4 space-x-reverse">
+                        <a href="#" class="nav-link active px-3 py-2 rounded-md font-medium transition" data-page="home">خانه</a>
+                        <a href="#" class="nav-link hover:bg-blue-700 px-3 py-2 rounded-md font-medium transition" data-page="services">خدمات</a>
+                        <a href="#" class="nav-link hover:bg-blue-700 px-3 py-2 rounded-md font-medium transition" data-page="accessories">محصولات</a>
+                        <a href="#" class="nav-link hover:bg-blue-700 px-3 py-2 rounded-md font-medium transition" data-page="education">آموزش‌ها</a>
+                        <a href="#" class="nav-link hover:bg-blue-700 px-3 py-2 rounded-md font-medium transition" data-page="about">درباره ما</a>
+                        <a href="#" class="nav-link hover:bg-blue-700 px-3 py-2 rounded-md font-medium transition" data-page="contact">تماس با ما</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-gray-300">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden primary-bg border-t border-blue-600">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="nav-link block px-3 py-2 text-white hover:bg-blue-700 rounded" data-page="home">خانه</a>
+                <a href="#" class="nav-link block px-3 py-2 text-white hover:bg-blue-700 rounded" data-page="services">خدمات</a>
+                <a href="#" class="nav-link block px-3 py-2 text-white hover:bg-blue-700 rounded" data-page="accessories">محصولات</a>
+                <a href="#" class="nav-link block px-3 py-2 text-white hover:bg-blue-700 rounded" data-page="education">آموزش‌ها</a>
+                <a href="#" class="nav-link block px-3 py-2 text-white hover:bg-blue-700 rounded" data-page="about">درباره ما</a>
+                <a href="#" class="nav-link block px-3 py-2 text-white hover:bg-blue-700 rounded" data-page="contact">تماس با ما</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home-page" class="page-section active">
+        <!-- Hero Section -->
+        <div class="gradient-bg text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="fade-in">
+                    <div class="text-6xl mb-6">💻</div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">خدمات کمپیوتری دانشجویان</h1>
+                    <p class="text-xl md:text-2xl mb-5">همراه شما در یادگیری و تکنولوژی</p>
+                     <p class="text-xl md:text-2xl mb-5">با مدیریت : انجینر فرشاد محمدی</p>
+                    <p class="text-lg mb-12 max-w-3xl mx-auto">مرکز جامع ترمیم، فروش و آموزش تکنولوژی با خدمات حرفه‌ای و پکیج‌های آموزشی متنوع</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Access Buttons -->
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl font-bold primary-text mb-4">دسترسی سریع</h2>
+                    <p class="text-gray-600">به بخش‌های مختلف وب‌سایت دسترسی پیدا کنید</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <button class="quick-access-btn primary-bg text-white p-6 rounded-xl hover-scale fade-in" data-page="services">
+                        <div class="text-4xl mb-4">🧰</div>
+                        <h3 class="text-xl font-bold mb-2">خدمات ترمیم</h3>
+                        <p class="text-sm opacity-90">نصب، ترمیم و عیب‌یابی</p>
+                    </button>
+                    <button class="quick-access-btn primary-bg text-white p-6 rounded-xl hover-scale fade-in" data-page="accessories">
+                        <div class="text-4xl mb-4">💻</div>
+                        <h3 class="text-xl font-bold mb-2">وسایل کمپیوتر</h3>
+                        <p class="text-sm opacity-90">قطعات و لوازم جانبی</p>
+                    </button>
+                    <button class="quick-access-btn primary-bg text-white p-6 rounded-xl hover-scale fade-in" data-page="education">
+                        <div class="text-4xl mb-4">🎓</div>
+                        <h3 class="text-xl font-bold mb-2">پکیج‌های آموزشی</h3>
+                        <p class="text-sm opacity-90">دوره‌های تخصصی IT</p>
+                    </button>
+                    <button class="quick-access-btn primary-bg text-white p-6 rounded-xl hover-scale fade-in" data-page="contact">
+                        <div class="text-4xl mb-4">📞</div>
+                        <h3 class="text-xl font-bold mb-2">تماس با ما</h3>
+                        <p class="text-sm opacity-90">ارتباط و مشاوره</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="py-16 secondary-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+                        <h2 class="text-3xl font-bold primary-text mb-6">معرفی مرکز</h2>
+                        <p class="text-lg text-gray-700 mb-6">
+                            خدمات کمپیوتری دانشجویان مرکزی جامع و حرفه‌ای است که در زمینه‌های مختلف تکنولوژی خدمات ارائه می‌دهد.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            ما با ترکیب خدمات ترمیم تخصصی، فروش قطعات اصلی و ارائه پکیج‌های آموزشی کاربردی، تمام نیازهای تکنولوژیک شما را پوشش می‌دهیم.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 primary-bg rounded-full ml-3"></div>
+                                <span class="text-gray-700">خدمات ترمیم و نگهداری تخصصی</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 primary-bg rounded-full ml-3"></div>
+                                <span class="text-gray-700">فروش قطعات اصلی با ضمانت</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 primary-bg rounded-full ml-3"></div>
+                                <span class="text-gray-700">پکیج‌های آموزشی متنوع و کاربردی</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-8 rounded-2xl">
+                            <div class="text-6xl mb-4">🎯</div>
+                            <h3 class="text-xl font-bold primary-text mb-2">هدف ما</h3>
+                            <p class="text-gray-600">ارتقای مهارت‌های تکنولوژی و سهولت دسترسی به خدمات IT برای همه</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services-page" class="page-section">
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h1 class="text-4xl font-bold primary-text mb-4">🧰 خدمات ترمیم کمپیوتر</h1>
+                    <p class="text-lg text-gray-600">خدمات تخصصی ترمیم و عیب‌یابی با کیفیت بالا</p>
+                </div>
+
+                <!-- Services Details -->
+                <div class="grid md:grid-cols-2 gap-8 mb-16">
+                    <div class="bg-gray-50 p-8 rounded-xl fade-in">
+                        <h3 class="text-xl font-bold primary-text mb-4">نصب و راه‌اندازی</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>✅ نصب ویندوز (تمام نسخه‌ها)</li>
+                            <li>✅ نصب لینوکس و سیستم‌عامل‌های مختلف</li>
+                            <li>✅ نصب درایورها و نرم‌افزارهای تخصصی</li>
+                            <li>✅ تنظیمات بهینه‌سازی سیستم</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl fade-in">
+                        <h3 class="text-xl font-bold primary-text mb-4">ترمیم سخت‌افزار</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>✅ ترمیم لپ‌تاپ و کیس دسکتاپ</li>
+                            <li>✅ تعمیر پرنتر و اسکنر</li>
+                            <li>✅ ترمیم UPS و منابع تغذیه</li>
+                            <li>✅ عیب‌یابی شبکه و مودم</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl fade-in">
+                        <h3 class="text-xl font-bold primary-text mb-4">امنیت و بازیابی</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>✅ پاک‌سازی ویروس و بدافزار</li>
+                            <li>✅ بک‌آپ و ریکاوری داده‌ها</li>
+                            <li>✅ بازیابی فایل‌های حذف شده</li>
+                            <li>✅ تنظیمات امنیتی پیشرفته</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl fade-in">
+                        <h3 class="text-xl font-bold primary-text mb-4">خدمات ویژه</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>✅ سرویس و نگهداری شرکت‌ها</li>
+                            <li>✅ پشتیبانی فنی محصلان</li>
+                            <li>✅ مشاوره خرید سیستم</li>
+                            <li>✅ خدمات فوری و تضمینی</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Services Gallery -->
+                <div class="fade-in">
+                    <h2 class="text-2xl font-bold primary-text mb-8 text-center">گالری خدمات ترمیم</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="https://img.grouponcdn.com/bynder/VYWBbAJ8BTVko16aEkhszrtW5Sv/VY-2048x1229/v1/t440x300.jpg" alt="خدمات ترمیم ۱" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🔧</div>
+                                <span class="text-sm">خدمات ترمیم ۱</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://careerkarma.com/blog/wp-content/uploads/2022/01/Building-Your-Laptop-From-Scratch.jpg" alt="خدمات ترمیم ۲" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">💻</div>
+                                <span class="text-sm">خدمات ترمیم ۲</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.9hhU45H9NFfJGdcNqfTL2AHaFP?cb=12&w=1249&h=885&rs=1&pid=ImgDetMain&o=7&rm=3" alt="خدمات ترمیم ۳" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🖥️</div>
+                                <span class="text-sm">خدمات ترمیم ۳</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.EYaMn0T1aEXDqstebX5Q_QHaE7?cb=12&w=1600&h=1064&rs=1&pid=ImgDetMain&o=7&rm=3" alt="خدمات ترمیم ۴" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🖨️</div>
+                                <span class="text-sm">خدمات ترمیم ۴</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP._irivKeYfd29X9JDHHeBiQHaE8?cb=12&w=1200&h=800&rs=1&pid=ImgDetMain&o=7&rm=3" alt="خدمات ترمیم ۵" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">⚡</div>
+                                <span class="text-sm">خدمات ترمیم ۵</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://thumbs.dreamstime.com/b/computer-repair-tech-fixes-motherboard-service-center-tech-fixes-motherboard-service-center-145976807.jpg" alt="خدمات ترمیم ۶" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🔌</div>
+                                <span class="text-sm">خدمات ترمیم ۶</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.ntMbbE7amnUiObujBEBZXAHaFW?cb=12&w=1600&h=1157&rs=1&pid=ImgDetMain&o=7&rm=3" alt="خدمات ترمیم ۷" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🌐</div>
+                                <span class="text-sm">خدمات ترمیم ۷</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.0pzKrt_h9IKDWNIt_Yb0iAHaFW?cb=12&w=1600&h=1157&rs=1&pid=ImgDetMain&o=7&rm=3" alt="خدمات ترمیم ۸" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">💾</div>
+                                <span class="text-sm">خدمات ترمیم ۸</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.xwEv6iE2yNj-IQ9byOC_fwHaEx?cb=12&w=1024&h=659&rs=1&pid=ImgDetMain&o=7&rm=3" alt="خدمات ترمیم ۹" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🔒</div>
+                                <span class="text-sm">خدمات ترمیم ۹</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.dq2EVpZ3IY29M9We79_MBQHaE8?cb=12&w=1024&h=683&rs=1&pid=ImgDetMain&o=7&rm=3" alt="خدمات ترمیم ۱۰" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">⚙️</div>
+                                <span class="text-sm">خدمات ترمیم ۱۰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories Page -->
+    <section id="accessories-page" class="page-section">
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h1 class="text-4xl font-bold primary-text mb-4">💻 وسایل کمپیوتر</h1>
+                    <p class="text-lg text-gray-600">قطعات اصلی و لوازم جانبی با کیفیت بالا</p>
+                </div>
+
+                <!-- Products Description -->
+                <div class="bg-gray-50 p-8 rounded-xl mb-16 fade-in">
+                    <h2 class="text-2xl font-bold primary-text mb-6">محصولات موجود در فروشگاه</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">قطعات اصلی:</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• رم (RAM) با برندهای معتبر</li>
+                                <li>• هارد دیسک (HDD) و حافظه SSD</li>
+                                <li>• مادربورد و پردازنده</li>
+                                <li>• کارت گرافیک و منبع تغذیه</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">وسایل جانبی:</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• کیبورد و ماوس (سیمی و بی‌سیم)</li>
+                                <li>• مانیتور LCD و LED</li>
+                                <li>• کابل‌ها و وسایل شبکه</li>
+                                <li>• هدفون، اسپیکر و وب‌کم</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-6 bg-yellow-100 rounded-lg">
+                        <h3 class="text-lg font-bold text-yellow-800 mb-2">🎓 تخفیف ویژه محصلان</h3>
+                        <p class="text-yellow-700">تمام محصولات دارای ضمانت و قیمت مناسب هستند. محصلان و استادان از تخفیف ویژه بهره‌مند می‌شوند.</p>
+                    </div>
+                </div>
+
+                <!-- Accessories Gallery -->
+                <div class="fade-in">
+                    <h2 class="text-2xl font-bold primary-text mb-8 text-center">گالری وسایل جانبی</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.BGiFryD8BTM8Ix8F2uIJ3gHaFA?cb=12&w=690&h=466&rs=1&pid=ImgDetMain&o=7&rm=3" alt="کیبورد" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">⌨️</div>
+                                <span class="text-sm">کیبورد</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.52iqBuUjPqYpi_tli88FsQHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="ماوس" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🖱️</div>
+                                <span class="text-sm">ماوس</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://media.istockphoto.com/id/500684659/photo/ssd-drives.jpg?s=612x612&w=0&k=20&c=y5KN4swnSmm-JZUTBHD_uUvuRJDlOA-fI0eVQu_Cmyo=" alt="حافظه رم" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">💾</div>
+                                <span class="text-sm">حافظه رم</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse3.mm.bing.net/th/id/OIP.Jn8vKyaxzTggSSno6Em3IQHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="هارد دیسک" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">💿</div>
+                                <span class="text-sm">هارد دیسک</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://th.bing.com/th/id/OIP.jWj4y_b9L637-5ys7kWIGAHaFj?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="مانیتور" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🖥️</div>
+                                <span class="text-sm">مانیتور</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.Vzi2AlSPxop5qdOdIwpWwwHaDt?cb=12&w=800&h=400&rs=1&pid=ImgDetMain&o=7&rm=3" alt="هدفون" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🎧</div>
+                                <span class="text-sm">هدفون</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://img.freepik.com/premium-psd/usb-pen-drive-mockup_338742-4051.jpg" alt="کابل‌ها" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🔌</div>
+                                <span class="text-sm">کابل‌ها</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse3.mm.bing.net/th/id/OIP.KYo_dZzhQ1aJ2vw8WYDLiwHaEL?cb=12&w=1201&h=678&rs=1&pid=ImgDetMain&o=7&rm=3" alt="وسایل شبکه" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🌐</div>
+                                <span class="text-sm">وسایل شبکه</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.lWuctceW381jJD7NUrl6-gHaFj?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="وب‌کم" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">📹</div>
+                                <span class="text-sm">وب‌کم</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.SUCPKAwz1zlzPrBZ6z4GiAHaFj?cb=12&w=4032&h=3024&rs=1&pid=ImgDetMain&o=7&rm=3" alt="اسپیکر" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🔊</div>
+                                <span class="text-sm">اسپیکر</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Page -->
+    <section id="education-page" class="page-section">
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h1 class="text-4xl font-bold primary-text mb-4">🎓 پکیج‌های آموزشی</h1>
+                    <p class="text-lg text-gray-600">ده‌ها پکیج آموزشی از بهترین منابع جهان</p>
+                </div>
+
+                <!-- Education Description -->
+                <div class="bg-gray-50 p-8 rounded-xl mb-16 fade-in">
+                    <h2 class="text-2xl font-bold primary-text mb-6">درباره پکیج‌های آموزشی</h2>
+                    <p class="text-lg text-gray-700 mb-6">
+                        این مرکز ده‌ها پکیج آموزشی از بهترین منابع جهان ارائه می‌دهد که برای همه سطوح از مبتدی تا پیشرفته مناسب است.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">موضوعات برنامه‌نویسی:</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• Python (مبتدی تا پیشرفته)</li>
+                                <li>• Java و Spring Framework</li>
+                                <li>• توسعه وب (HTML, CSS, JavaScript)</li>
+                                <li>• C++ و برنامه‌نویسی سیستم</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">طراحی و گرافیک:</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• Adobe Photoshop حرفه‌ای</li>
+                                <li>• Illustrator و طراحی لوگو</li>
+                                <li>• Canva و طراحی سریع</li>
+                                <li>• UI/UX Design</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">نرم‌افزارهای آفیس:</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• Microsoft Word پیشرفته</li>
+                                <li>• Excel و تحلیل داده</li>
+                                <li>• PowerPoint حرفه‌ای</li>
+                                <li>• Google Workspace</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">تخصصی IT:</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• امنیت سایبری و Ethical Hacking</li>
+                                <li>• شبکه و مدیریت سرور</li>
+                                <li>• ویندوز و سخت‌افزار</li>
+                                <li>• اینترنت و دیجیتال مارکتینگ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Gallery -->
+                <div class="fade-in">
+                    <h2 class="text-2xl font-bold primary-text mb-8 text-center">گالری پکیج‌های آموزشی</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.Yps6MY2rR-KG_21-9mLVDAHaHa?cb=12&w=800&h=800&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Python" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🐍</div>
+                                <span class="text-sm">Python</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://storage.googleapis.com/kaggle-datasets-images/831948/2997048/938487aa621ee98baf7cfefb92c5a436/dataset-cover.jpg?t=2023-05-18-18-10-21" alt="Java" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">☕</div>
+                                <span class="text-sm">Java</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://th.bing.com/th/id/R.61f435af627585bc8f9d99ff9112e53e?rik=H7Zzjgwf4xn0ag&pid=ImgRaw&r=0" alt="Web Development" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🌐</div>
+                                <span class="text-sm">Web Development</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://itech-co.ir/wp-content/uploads/2024/06/hack.jpg" alt="Photoshop" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🎨</div>
+                                <span class="text-sm">Photoshop</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.IHu27Pk5dbpHXqMH7kU3ywHaHa?cb=12&w=500&h=500&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Excel" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">📊</div>
+                                <span class="text-sm">Excel</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.Hbp5xNCcJ1nMeGI50Cf3SAHaHa?cb=12&w=1024&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Cyber Security" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🔒</div>
+                                <span class="text-sm">Cyber Security</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://prozhe24.com/wp-content/uploads/2024/10/%D9%BE%DA%A9%DB%8C%D8%AC-%D8%A2%D9%85%D9%88%D8%B2%D8%B4-%D8%B4%D8%A8%DA%A9%D9%87-%D9%87%D8%A7%DB%8C-%DA%A9%D8%A7%D9%85%D9%BE%DB%8C%D9%88%D8%AA%D8%B1-1.jpg" alt="Networking" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🌐</div>
+                                <span class="text-sm">Networking</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://th.bing.com/th/id/OIP.QOg-QPevLRpk2vGQYKwRPwAAAA?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Windows" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🖥️</div>
+                                <span class="text-sm">Windows</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.8XsSfJVKAsMFvXZC_2wFrAHaE8?cb=12&w=1200&h=800&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Digital Marketing" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">📱</div>
+                                <span class="text-sm">Digital Marketing</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://tse3.mm.bing.net/th/id/OIP.Pqs0ykIjTEbU0p-Bc_Q6iQHaDh?cb=12&w=1280&h=608&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AI & Machine Learning" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-gray-500 text-center hidden">
+                                <div class="text-2xl mb-2">🤖</div>
+                                <span class="text-sm">AI & Machine Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about-page" class="page-section">
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h1 class="text-4xl font-bold primary-text mb-4">📖 درباره ما</h1>
+                    <p class="text-lg text-gray-600">آشنایی با مرکز خدمات کمپیوتری دانشجویان</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="fade-in">
+                        <h2 class="text-3xl font-bold primary-text mb-6">درباره مرکز</h2>
+                        <p class="text-lg text-gray-700 mb-6">
+                            «خدمات کمپیوتری دانشجویان» مرکزی است برای ترمیم، فروش و آموزش در عرصه تکنالوژی. هدف ما ارتقای مهارت‌های محصلان و سهولت در دسترسی به خدمات IT است.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            ما با سال‌ها تجربه در زمینه تکنولوژی و با تیمی از متخصصان مجرب، خدمات باکیفیت و قابل اعتماد ارائه می‌دهیم. رضایت مشتریان و کیفیت خدمات اولویت اصلی ماست.
+                        </p>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-8 rounded-2xl">
+                            <div class="text-6xl mb-4">🏢</div>
+                            <h3 class="text-xl font-bold primary-text mb-2">مرکز ما</h3>
+                            <p class="text-gray-600">مجهز به جدیدترین تجهیزات و ابزارهای تخصصی</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="text-center p-6 bg-gray-50 rounded-xl fade-in">
+                        <div class="text-4xl mb-4">👥</div>
+                        <h3 class="text-xl font-bold primary-text mb-2">تیم متخصص</h3>
+                        <p class="text-gray-600">متخصصان مجرب با سال‌ها تجربه در زمینه IT</p>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl fade-in">
+                        <div class="text-4xl mb-4">⭐</div>
+                        <h3 class="text-xl font-bold primary-text mb-2">کیفیت بالا</h3>
+                        <p class="text-gray-600">ارائه خدمات با بالاترین کیفیت و استانداردها</p>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl fade-in">
+                        <div class="text-4xl mb-4">😊</div>
+                        <h3 class="text-xl font-bold primary-text mb-2">رضایت مشتری</h3>
+                        <p class="text-gray-600">بیش از ۹۵٪ رضایت مشتریان از خدمات ما</p>
+                    </div>
+                </div>
+
+                <!-- Mission & Vision -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 p-8 rounded-xl fade-in">
+                        <h3 class="text-2xl font-bold primary-text mb-4">🎯 ماموریت ما</h3>
+                        <p class="text-gray-700">
+                            ارائه خدمات جامع و باکیفیت در زمینه تکنولوژی اطلاعات، آموزش مهارت‌های کاربردی و پشتیبانی از محصلان و متخصصان در مسیر پیشرفت تکنولوژیک.
+                        </p>
+                    </div>
+                    <div class="bg-green-50 p-8 rounded-xl fade-in">
+                        <h3 class="text-2xl font-bold primary-text mb-4">🔮 چشم‌انداز ما</h3>
+                        <p class="text-gray-700">
+                            تبدیل شدن به مرجع اصلی خدمات تکنولوژی در منطقه و کمک به ایجاد جامعه‌ای آگاه و مسلط به فناوری‌های نوین.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact-page" class="page-section">
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h1 class="text-4xl font-bold primary-text mb-4">📞 تماس با ما</h1>
+                    <p class="text-lg text-gray-600">آماده پاسخگویی و خدمت‌رسانی به شما هستیم</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div class="fade-in">
+                        <h2 class="text-2xl font-bold primary-text mb-8">اطلاعات تماس</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4 space-x-reverse">
+                                <div class="primary-bg text-white p-3 rounded-full">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">شماره تماس</h4>
+                                    <p class="text-gray-600">0771159678</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 space-x-reverse">
+                                <div class="primary-bg text-white p-3 rounded-full">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">ایمیل</h4>
+                                    <p class="text-gray-600">danishjoyanpc786@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 space-x-reverse">
+                                <div class="primary-bg text-white p-3 rounded-full">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">آدرس</h4>
+                                    <p class="text-gray-600">افغانستان، کابل، کوته سنگی، مارکیت کفتان ضدران، منزل سوم، دوکان نمبر 56</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media -->
+                        <div class="mt-12">
+                            <h3 class="text-xl font-bold primary-text mb-6">شبکه‌های اجتماعی</h3>
+                            <div class="flex space-x-4 space-x-reverse">
+                                <!-- Twitter - لینک خود را اینجا قرار دهید -->
+                                <a href="#" class="primary-bg text-white p-3 rounded-full hover:bg-blue-700 transition" title="Twitter">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                    </svg>
+                                </a>
+                                <!-- Facebook - لینک خود را اینجا قرار دهید -->
+                                <a href="#" class="primary-bg text-white p-3 rounded-full hover:bg-blue-700 transition" title="Facebook">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                    </svg>
+                                </a>
+                                <!-- WhatsApp - متصل به شماره شما -->
+                                <a href="https://wa.me/93771159678" target="_blank" rel="noopener noreferrer" class="primary-bg text-white p-3 rounded-full hover:bg-blue-700 transition" title="WhatsApp">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"/>
+                                    </svg>
+                                </a>
+                                <!-- TikTok - لینک خود را اینجا قرار دهید -->
+                                <a href="#" class="primary-bg text-white p-3 rounded-full hover:bg-blue-700 transition" title="TikTok">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005.76 20.5a6.34 6.34 0 003.14-5.07V3.5h3.45a4.83 4.83 0 004.25 3.77z"/>
+                                    </svg>
+                                </a>
+                                <!-- YouTube - لینک خود را اینجا قرار دهید -->
+                                <a href="#" class="primary-bg text-white p-3 rounded-full hover:bg-blue-700 transition" title="YouTube">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="fade-in">
+                        <div class="bg-gray-50 p-8 rounded-xl">
+                            <h2 class="text-2xl font-bold primary-text mb-6">فرم تماس</h2>
+                            <form id="contact-form" class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">نام و نام خانوادگی</label>
+                                    <input type="text" required class="form-input w-full px-4 py-3 rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">ایمیل</label>
+                                    <input type="email" required class="form-input w-full px-4 py-3 rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">موضوع</label>
+                                    <select required class="form-input w-full px-4 py-3 rounded-lg">
+                                        <option value="">انتخاب کنید...</option>
+                                        <option value="repair">خدمات ترمیم</option>
+                                        <option value="products">خرید محصولات</option>
+                                        <option value="education">پکیج‌های آموزشی</option>
+                                        <option value="other">سایر</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">پیام</label>
+                                    <textarea rows="5" required class="form-input w-full px-4 py-3 rounded-lg" placeholder="پیام خود را بنویسید..."></textarea>
+                                </div>
+                                <button type="submit" class="w-full primary-bg text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                                    ارسال پیام
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="primary-bg text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-xl font-bold mb-4">💻 خدمات کمپیوتری دانشجویان</h3>
+                    <p class="text-blue-200 mb-4">همراه شما در یادگیری و تکنولوژی</p>
+                    <p class="text-blue-200 text-sm">مرکز جامع ترمیم، فروش و آموزش تکنولوژی</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">خدمات</h4>
+                    <ul class="space-y-2 text-blue-200 text-sm">
+                        <li><a href="#" class="hover:text-white transition" data-page="services">ترمیم کمپیوتر</a></li>
+                        <li><a href="#" class="hover:text-white transition" data-page="accessories">فروش قطعات</a></li>
+                        <li><a href="#" class="hover:text-white transition" data-page="education">پکیج‌های آموزشی</a></li>
+                        <li><a href="#" class="hover:text-white transition" data-page="contact">مشاوره تکنولوژی</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">تماس</h4>
+                    <ul class="space-y-2 text-blue-200 text-sm">
+                        <li>📞 0771159678</li>
+                        <li>📧 danishjoyanpc786@gmail.com</li>
+                        <li>📍 افغانستان، کابل، کوته سنگی، مارکیت کفتان ضدران، منزل سوم، دوکان نمبر 56</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-600 mt-8 pt-8 text-center">
+                <p class="text-blue-200 text-sm">© ۲۰۲۴ خدمات کمپیوتری دانشجویان. تمامی حقوق محفوظ است.</p>
+                <p class="text-blue-200 text-sm">طراح : انجینر علی محمد کریمی (0764002319)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Security: Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Security: Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+S
+            if (e.ctrlKey && e.keyCode === 83) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+A
+            if (e.ctrlKey && e.keyCode === 65) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+C
+            if (e.ctrlKey && e.keyCode === 67) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Security: Disable text selection
+        document.onselectstart = function() {
+            return false;
+        };
+
+        // Security: Disable drag
+        document.ondragstart = function() {
+            return false;
+        };
+
+        // Page Navigation System
+        const pages = document.querySelectorAll('.page-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const quickAccessBtns = document.querySelectorAll('.quick-access-btn');
+
+        function showPage(pageId) {
+            // Hide all pages
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Trigger animations
+                setTimeout(() => {
+                    const fadeElements = targetPage.querySelectorAll('.fade-in');
+                    fadeElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, index * 100);
+                    });
+                }, 100);
+            }
+            
+            // Update navigation active state
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Navigation event listeners
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.dataset.page;
+                showPage(pageId);
+            });
+        });
+
+        // Quick access buttons
+        quickAccessBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const pageId = this.dataset.page;
+                showPage(pageId);
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Contact form submission - ارسال به واتساپ
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // دریافت اطلاعات فرم
+            const formData = new FormData(this);
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const subject = this.querySelector('select').value;
+            const message = this.querySelector('textarea').value;
+            
+            // ساخت پیام برای واتساپ
+            const whatsappMessage = `سلام! پیام جدید از وب‌سایت:
+            
+نام: ${name}
+ایمیل: ${email}
+موضوع: ${subject}
+پیام: ${message}
+
+ارسال شده از: خدمات کمپیوتری دانشجویان`;
+            
+            // ارسال به واتساپ
+            const whatsappURL = `https://wa.me/93771159678?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+            
+            // نمایش پیام تأیید
+            alert('پیام شما آماده ارسال است! واتساپ باز خواهد شد.');
+            this.reset();
+        });
+
+        // Initialize animations on page load
+        window.addEventListener('load', function() {
+            const fadeElements = document.querySelectorAll('#home-page .fade-in');
+            fadeElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 200);
+            });
+        });
+
+        // Scroll animations for other pages
+        function handleScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in:not(.visible)');
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScrollAnimations);
+
+        // Security: Clear console periodically
+        setInterval(function() {
+            console.clear();
+        }, 1000);
+
+        // Security: Detect developer tools
+        let devtools = {
+            open: false,
+            orientation: null
+        };
+
+        const threshold = 160;
+
+        setInterval(function() {
+            if (window.outerHeight - window.innerHeight > threshold || 
+                window.outerWidth - window.innerWidth > threshold) {
+                if (!devtools.open) {
+                    devtools.open = true;
+                    document.body.innerHTML = '<div style="text-align:center;padding:50px;font-family:Arial;"><h1>دسترسی محدود</h1><p>این وب‌سایت محافظت شده است.</p></div>';
+                }
+            } else {
+                devtools.open = false;
+            }
+        }, 500);
+
+        // Disable print
+        window.addEventListener('beforeprint', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Additional security measures
+        document.addEventListener('keydown', function(e) {
+            // Disable Ctrl+Shift+C (Chrome DevTools)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+J (Chrome Console)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+K (Firefox Console)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 75) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a425cfa479f9d7',t:'MTc1OTc0MzEwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
